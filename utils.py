@@ -63,7 +63,7 @@ def remove_outliers(data):
     return list(outliers_removed.index)
 
 
-# this function need feature scaling before
+# this function needs feature scaling before
 
 def top_15_features(df):
     df = df.copy()
