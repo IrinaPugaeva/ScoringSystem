@@ -15,13 +15,9 @@ from sklearn.metrics import roc_auc_score
 
 
 def remove_outliers(data):
-        
     """
-
     A function for removing outliers from dataset.
-
     :param data: dataset
-
     """
     
     # calculate summary statistics
@@ -64,17 +60,13 @@ def remove_outliers(data):
 
 
 def top_15_features(df):
-    
     """
-
     A function for choosing top_15 the most important features for logistic regression.
-    
     this function needs feature scaling before
-
     :param df: dataset
-
     """
-        
+    
+    
     df = df.copy()
     y = df['TARGET']
     df.drop('TARGET', axis=1, inplace=True)
@@ -95,15 +87,12 @@ def top_15_features(df):
 
 
 def mean_value_imputer(data):
-
     """
-
     A function for filling missing values in dataset with mean value for each feature.
-
     :param data: dataset
-
     """
-
+    
+    
     X = np.array(data)
     mask = X != X
 
