@@ -14,16 +14,15 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
 
 
-def plot_roc_cur(fper, tper, title):  
-    plt.plot(fper, tper, color='orange', label='ROC')
-    plt.plot([0, 1], [0, 1], color='darkblue', linestyle='--')
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title(title)
-    plt.legend()
-
-    
 def remove_outliers(data):
+        
+    """
+
+    A function for removing outliers from dataset.
+
+    :param data: dataset
+
+    """
     
     # calculate summary statistics
 
@@ -63,9 +62,19 @@ def remove_outliers(data):
     return list(outliers_removed.index)
 
 
-# this function needs feature scaling before
 
 def top_15_features(df):
+    
+    """
+
+    A function for choosing top_15 the most important features for logistic regression.
+    
+    this function needs feature scaling before
+
+    :param df: dataset
+
+    """
+        
     df = df.copy()
     y = df['TARGET']
     df.drop('TARGET', axis=1, inplace=True)
@@ -83,3 +92,31 @@ def top_15_features(df):
     A_cal_0 = list(feat_importances.features.iloc[0:14,])
 
     return roc_auc_score(y_test, y_scores), A_cal_0
+
+
+def mean_value_imputer(data):
+
+    """
+
+    A function for filling missing values in dataset with mean value for each feature.
+
+    :param data: dataset
+
+    """
+
+    X = np.array(data)
+    mask = X != X
+
+    for col in range(X.shape[1]):
+        X[mask[:, col], col] = np.mean(X[~mask[:, col], col])
+    
+    return X
+
+
+def plot_roc_cur(fper, tper, title):  
+    plt.plot(fper, tper, color='orange', label='ROC')
+    plt.plot([0, 1], [0, 1], color='darkblue', linestyle='--')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title(title)
+    plt.legend()
