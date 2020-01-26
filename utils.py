@@ -81,7 +81,7 @@ def top_15_features(df):
     sorted_idx = np.argsort(feature_importance)
     feat_importances = pd.DataFrame({'features': X_test.columns[sorted_idx], 'weights': feature_importance[sorted_idx]})
     feat_importances.sort_values('weights', ascending=False, inplace=True)
-    A_cal_0 = list(feat_importances.features.iloc[0:14,])
+    A_cal_0 = list(feat_importances.features.iloc[0:15,])
 
     return roc_auc_score(y_test, y_scores), A_cal_0
 
